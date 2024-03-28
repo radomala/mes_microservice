@@ -1,0 +1,38 @@
+server:
+  port: 8888
+
+
+  # RMQ : POUR LES ROUTES
+  # SOLUTION 1  ==> soit on configure les routes dans fichier de config comme ici (c'est pas la meilleur solution)
+  # SOLUTION 2  ==> soit on utulise une classe de configuration (reagrdes las classe GETEWAYROUTES)
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+  cloud:
+    discovery:
+      enabled: true
+  # ---------------nom du microservice-------------------
+  application:
+    name: gateway-service
+  main:
+    web-application-type: reactive
+  #OEPNID CONNECT
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/ecom-web-app
+          jwk-set-uri: http://localhost:8081/realms/ecom-web-app/protocol/openid-connect/certs
+
+# c'est pour voir par exemple l'etat de santé du serveur (monitoring)....    http://localhost:8888/actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+#adresse de la registre eureka
+eureka:
+  client:
+    service-url.defaultZone: http://localhost:8761/eureka
+
+
