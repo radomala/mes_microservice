@@ -1,0 +1,19 @@
+#OEPNID CONNECT OAUTH2 AVEC SPRING SECURITY (dans ce config, on utlise le formulaire authentification de keycloc)
+security:
+  basic:
+    enabled: false
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8081/realms/ecom-web-app/protocol/openid-connect/userinfo
+      token-info-uri: http://localhost:8081/realms/ecom-web-app/protocol/openid-connect/token/introspect
+      prefer-token-info: false
+    client:
+      client-id: front-end-angular-client
+      access-token-uri: http://localhost:8081/realms/ecom-web-app/protocol/openid-connect/token
+      user-authorization-uri: http://localhost:8081/realms/ecom-web-app/protocol/openid-connect/auth
+      scope: openid
+      client-secret: xWskwS0avQaf1rLOwqdUDhROopWoOjWl
+      grant-type: password
+      #redirect-uri: http://localhost:8085/authentification
+
+

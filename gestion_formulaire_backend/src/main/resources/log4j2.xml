@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n" />
+        </Console>
+ 
+<!--         <File name="File" fileName="MyApp.log"> -->
+<!--             <PatternLayout -->
+<!--                 pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n" /> -->
+<!--         </File> -->
+        
+         <RollingFile name="File" fileName="MyApp.log"
+                     filePattern="logs/logs-%d{yyyy-MM-dd}-%i.txt.gz">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss} [%t] %-5level %-50c{1.} - %msg%n"  />
+            <Policies>
+            
+<!--             Si vous souhaitez remplacer les fichiers journaux en fonction de la taille du fichier et de la date et de l'heure, vous devez utiliser SizeBasedTriggeringPolicyet les TimeBasedRollingPolicydeux. -->
+                <!--  <TimeBasedRollingPolicy/> -->
+                 <SizeBasedTriggeringPolicy size="1 MB"/>
+                 <TimeBasedTriggeringPolicy interval="1" />
+             </Policies>
+         </RollingFile>
+     </Appenders>
+
+     <Loggers>
+         <Root level="info">
+             <AppenderRef ref="Console" />
+             <AppenderRef ref="File" />
+         </Root>
+     </Loggers>
+ </Configuration>
